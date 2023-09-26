@@ -5,6 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.dialog
 import com.giphytesttask.ui.screens.gifdetail.GifDetailScreen
 import com.giphytesttask.ui.screens.gifdetail.GifDetailScreenNavigation
 import com.giphytesttask.ui.screens.home.HomeScreen
@@ -27,7 +28,7 @@ fun AppNavHost(navController: NavHostController) {
             })
             HomeScreen(vm = hiltViewModel(), navigation = navigation)
         }
-        composable(
+        dialog(
             route = Screen.GifDetail.constRouteWithArg,
             arguments = Screen.GifDetail.arguments
         ) {
