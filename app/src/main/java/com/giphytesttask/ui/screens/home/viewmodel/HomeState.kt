@@ -4,10 +4,12 @@ import androidx.paging.PagingData
 import com.giphytesttask.base.UiState
 import com.giphytesttask.data.models.GifUi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 
 
 data class HomeState(
     val isLoading: Boolean = false,
-    val gifList: Flow<PagingData<GifUi>> = flowOf(PagingData.empty())
+    val gifList: Flow<PagingData<GifUi>> = flowOf(PagingData.empty()),
+    val text: MutableStateFlow<String> = MutableStateFlow("")
 ) : UiState

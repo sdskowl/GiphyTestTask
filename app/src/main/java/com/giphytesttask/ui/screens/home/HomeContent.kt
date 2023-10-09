@@ -15,15 +15,13 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -42,15 +40,13 @@ internal fun HomeContent(
 ) {
     val items = state.gifList.collectAsLazyPagingItems()
     val stateGrid = rememberLazyGridState()
-
+    val text by state.text.collectAsStateWithLifecycle()
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        var text by rememberSaveable {
-            mutableStateOf("")
-        }
+
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = text,
-            onValueChange = { text = it },
+            onValueChange = { state.text.value = it },
             keyboardActions = KeyboardActions(onSearch = {
                 invokes.onSearch(text)
             }), keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search)
